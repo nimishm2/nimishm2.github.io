@@ -20,7 +20,7 @@ const svg = d3.select("svg")
   .attr("transform", `translate(${margin.left},${margin.top})`);
 
 // main data load
-d3.csv("data/flights.csv", d3.autoType).then(data => {
+d3.csv("./data/flights.csv", d3.autoType).then(data => {
   state.data = data;
   drawOverview();
 });
