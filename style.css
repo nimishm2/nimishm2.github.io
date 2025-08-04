@@ -45,3 +45,14 @@ svg {
 .annotation-note {
   font-size: 12px;
 }
+
+.scene-header {
+  font-size: 16px;
+  font-weight: bold;
+  fill: #333;
+}
+
+svg {
+  /* allow anything drawn outside the nominal width/height to still show */
+  overflow: visible;
+}

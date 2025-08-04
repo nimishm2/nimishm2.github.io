@@ -8,6 +8,7 @@ let state = {
 };
 
 const margin = { top: 40, right: 20, bottom: 60, left: 60 };
+// const margin = { top: 80, right: 20, bottom: 60, left: 60 };
 const width = 800 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
 
@@ -26,10 +27,17 @@ function clearChart() {
   svg.selectAll("*").remove();
   d3.select("#controls").html("");
 }
-
+function drawSceneHeader(text) {
+  svg.append("text")
+    .attr("class", "scene-header")
+    .attr("x", 0)
+    .attr("y", -margin.top/2)    // halfway into the top margin
+    .text(text);
+}
 // 1. Overview: scatter of stops vs duration, colored by airline
 function drawOverview() {
   clearChart();
+  drawSceneHeader("Scene 1: Overview of all flights by number of stops");
   const data = state.data;
 
   const stops = Array.from(new Set(data.map(d => d.stops))).sort(d3.ascending);
@@ -124,6 +132,7 @@ function drillAirline(airline) {
   state.selectedAirline = airline;
   state.selectedClass = null;
   clearChart();
+  drawSceneHeader(`Scene 2: Flights for ${airline}`);
   const filtered = state.data.filter(d => d.airline === airline);
   if (filtered.length === 0) {
     svg.append("text")
@@ -207,6 +216,7 @@ svg.append("text")
 function drillClass(cls) {
   state.selectedClass = cls;
   clearChart();
+  drawSceneHeader(`Scene 3: ${cls} class flights`);
   const filtered = state.data.filter(d =>
     d.airline === state.selectedAirline && d.class === cls
   );
