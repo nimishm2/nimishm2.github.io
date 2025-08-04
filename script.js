@@ -132,7 +132,7 @@ function drillAirline(airline) {
   state.selectedAirline = airline;
   state.selectedClass = null;
   clearChart();
-  drawSceneHeader(`Scene 2: Flights for ${airline}`);
+  drawSceneHeader(`Scene 2: Flights for ${airline} by destination city`);
   const filtered = state.data.filter(d => d.airline === airline);
   if (filtered.length === 0) {
     svg.append("text")
@@ -216,7 +216,7 @@ svg.append("text")
 function drillClass(cls) {
   state.selectedClass = cls;
   clearChart();
-  drawSceneHeader(`Scene 3: ${cls} class flights`);
+  drawSceneHeader(`Scene 3: ${cls} class flights by duration`);
   const filtered = state.data.filter(d =>
     d.airline === state.selectedAirline && d.class === cls
   );
